@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #00649B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px; /* Adicionado padding para telas menores */
+}
+
+.home-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.home-button i {
+    color: black;
+}
+
+.home-button:hover i {
+    color: #FF5733;
+}
+
+.container {
+    background: linear-gradient(135deg, #31d2d8, #15ac98);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+h1 {
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+label {
+    font-weight: bolder;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.input-group div {
+    flex: 1; /* Garante que cada campo ocupe o mesmo espaço */
+    min-width: 150px; /* Define uma largura mínima para os campos */
+    max-width: 300px; /* Define uma largura máxima para os campos */
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Flexbox para alinhar os selects */
+.select-group {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os grupos quebrem para a próxima linha */
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.select-group div {
+    flex: 1;
+    min-width: 150px; /* Define uma largura mínima para os grupos */
+    max-width: 300px; /* Define uma largura máxima para os grupos */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0a65db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #FF5733;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+.centralizado {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.centralizado:hover {
+    color: #FF5733;
+    font-size: 19px;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 24px; /* Ajusta o tamanho da fonte do título em telas menores */
+    }
+
+    .home-button, .back-button {
+        padding: 8px; /* Ajusta o padding dos botões em telas menores */
+        font-size: 12px; /* Ajusta o tamanho da fonte dos botões */
+    }
+
+    .centralizado {
+        font-size: 14px; /* Diminui a fonte do link em telas menores */
+    }
+
+    .input-group div, .select-group div {
+        min-width: 100%; /* Faz os campos ocuparem toda a largura em telas menores */
+        max-width: 100%; /* Garante que os campos não ultrapassem a largura da tela */
+    }
+
+    .container {
+        padding: 10px; /* Ajusta o padding do container em telas menores */
+        min-height: 400px; /* Ajusta a altura mínima do container */
+    }
+}

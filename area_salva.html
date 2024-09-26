@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Salva</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="area_salva.css"> <!-- Link para o CSS -->
+</head>
+<body>
+
+<!-- Início do cabeçalho -->
+<header id="header">
+    <div class="box">
+        <div class="flexx">
+            <a id="logo" href="#">
+                <img src="assets/LOGO.jpeg" alt="Logo da Empresa">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="qs.html">Quem Somos</a></li>
+                    <li><a href="#">Como Reciclar</a></li>
+                    <li><a href="doar.html">Doar</a></li>
+                    <li><a href="StreetMap.html">Medir Área</a></li>
+                    <li class="boneco" id="user-menu">
+                        <a href="#"><i class="fa-solid fa-user"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<!-- FIM do cabeçalho -->
+
+<main>
+    <div class="container mt-5">
+        <h1>Área Salva</h1>
+        <p>Aqui você pode visualizar seus itens salvos.</p>
+        
+        <!-- Exibição do CPF -->
+        <p id="userCpf">Usuário: <span id="cpfDisplay"></span></p>
+
+        <div id="savedItems" class="list-group mb-4">
+            <!-- Itens salvos serão exibidos aqui -->
+        </div>
+
+        <button id="clearData" class="btn btn-clear">Apagar Todos os Dados Salvos</button>
+        <button id="logout" class="btn btn-danger">Sair</button>
+    </div>
+</main>
+
+<!-- Rodapé -->
+<footer>
+    <div id="footer_content">
+        <div id="footer_contacts">
+                <div id="eco_manta">
+                    <h2 id="eco">ECO</h2>
+                    <h2 id="manta">MANTA</h2>
+                </div>
+                <div id="footer_social_media">
+                    <a href="#" class="footer-link" id="instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" class="footer-link" id="facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#" class="footer-link" id="x-twitter">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                </div>
+        </div>
+
+        <ul class="footer-list">
+            <li>
+                <h3>Blog</h3>
+            </li>
+            <li>
+                <a href="#" class="footer-link">Dicas</a>
+            </li>
+            <li>
+                <a href="#" class="footer-link">Coleta Seletiva</a>
+            </li>
+            <li>
+                <a href="#" class="footer-link">Como Ajudar</a>
+            </li>
+        </ul>
+
+        <ul class="footer-list">
+            <li>
+                <h3>Software</h3>
+            </li>
+            <li>
+                <a href="#" class="footer-link">App</a>
+            </li>
+            <li>
+                <a href="#" class="footer-link">Desktop</a>
+            </li>
+            <li>
+                <a href="#" class="footer-link">Cloud</a>
+            </li>
+        </ul>
+        <div id="footer_subscribe">
+            <h3>Inscreva-se</h3>
+
+            <p>Receba mais informações pelo seu e-mail.</p>
+
+            <div id="input_group">
+                <input type="email" id="email">
+                <button>
+                    <i class="fa-regular fa-envelope"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer_copyright">
+        &#169 
+        2024 all rights reserved.
+    </div>
+</footer>
+
+<script>
+    // Verifica se o usuário está logado
+    const userLoggedIn = JSON.parse(localStorage.getItem('userLoggedIn'));
+
+    if (!userLoggedIn) {
+        window.location.href = 'login.html'; // Redireciona para o login se não estiver logado
+    } else {
+        // Exibe o CPF do usuário
+        document.getElementById('cpfDisplay').textContent = userLoggedIn.cpf;
+
+        // Lógica para buscar e exibir os dados salvos
+        const savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+        
+        const savedItemsContainer = document.getElementById('savedItems');
+        if (savedItems.length > 0) {
+            savedItems.forEach((item, index) => {
+                const listItem = document.createElement('div');
+                listItem.classList.add('list-group-item');
+                // Formata os dados que deseja exibir
+                listItem.innerHTML = `
+                    <strong>Largura:</strong> ${item.largura} metros<br>
+                    <strong>Comprimento:</strong> ${item.comprimento} metros<br>
+                    <strong>Área:</strong> ${item.area} metros quadrados<br>
+                    <strong>Mantas necessárias:</strong> ${item.mantas}<br>
+                    <strong>Caixas de leite necessárias:</strong> ${item.caixas}<br>
+                    <button class="btn btn-danger btn-sm mt-2 remove-item" data-index="${index}">Remover</button>
+                `;
+                savedItemsContainer.appendChild(listItem);
+            });
+        } else {
+            savedItemsContainer.innerHTML = '<div class="list-group-item">Nenhum item salvo.</div>';
+        }
+
+        // Adiciona eventos para os botões de remover
+        const removeButtons = document.querySelectorAll('.remove-item');
+        removeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const index = this.getAttribute('data-index');
+                savedItems.splice(index, 1); // Remove o item do array
+                localStorage.setItem('savedItems', JSON.stringify(savedItems)); // Atualiza o localStorage
+                location.reload(); // Atualiza a página
+            });
+        });
+    }
+
+    // Adiciona evento para logout
+    document.getElementById('logout').addEventListener('click', function() {
+        localStorage.removeItem('userLoggedIn'); // Remove a informação do usuário
+        window.location.href = 'login.html'; // Redireciona para o login
+    });
+
+    // Adiciona evento para limpar dados salvos
+    document.getElementById('clearData').addEventListener('click', function() {
+        localStorage.removeItem('savedItems'); // Remove os itens salvos
+        document.getElementById('savedItems').innerHTML = '<div class="list-group-item">Nenhum item salvo.</div>'; // Atualiza a exibição
+        alert("Todos os dados salvos foram apagados!");
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
